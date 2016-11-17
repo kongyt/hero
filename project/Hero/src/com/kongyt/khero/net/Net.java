@@ -87,7 +87,7 @@ public class Net{
 				message.what = SV.RECV_SERVER_DATA;
 				bundle.putInt("msgId", msgId);
 				bundle.putInt("msgLen", msgLen);
-				bundle.putByteArray("msg_data", msgData);
+				bundle.putByteArray("msgData", msgData);
 				message.setData(bundle);
 				
 				msgHandler.handleMessage(message);
