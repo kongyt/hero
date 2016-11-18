@@ -1,0 +1,26 @@
+
+hero_menu.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+level1
+  rotate: false
+  xy: 2, 204
+  size: 300, 200
+  orig: 300, 200
+  offset: 0, 0
+  index: -1
+level2
+  rotate: false
+  xy: 2, 2
+  size: 300, 200
+  orig: 300, 200
+  offset: 0, 0
+  index: -1
+menu_bg
+  rotate: false
+  xy: 2, 406
+  size: 800, 480
+  orig: 800, 480
+  offset: 0, 0
+  index: -1

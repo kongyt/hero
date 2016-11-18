@@ -16,9 +16,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.kongyt.khero.common.SceneData;
+import com.kongyt.khero.managers.GM;
 import com.kongyt.khero.managers.RM;
 import com.kongyt.khero.net.BaseModule;
 import com.kongyt.khero.net.Net;
+import com.kongyt.khero.utils.SV;
 
 public class LoginScene extends BaseScene {
 
@@ -42,7 +45,7 @@ public class LoginScene extends BaseScene {
 	public LoginScene(){
 		Net.instance().registerModule(baseModule);		
 		
-		TextureAtlas atlas = RM.instance().getTexAtls("loading/loading.atlas");
+		TextureAtlas atlas = RM.instance().getTexAtls("hero_loading/hero_loading.atlas");
 		Sprite tmp1 = atlas.createSprite("loading_bg");
 		bg = new Image(tmp1);
 		uiStage.addActor(bg);
@@ -63,17 +66,14 @@ public class LoginScene extends BaseScene {
 		textFieldFont = new BitmapFont(Gdx.files.internal("fonts/text_field_font.fnt"));
 		textFieldFont.setScale(0.5f);
 		
+		atlas = RM.instance().getTexAtls("hero_common/hero_common.atlas");
+		
 		TextField.TextFieldStyle tfstyle = new TextField.TextFieldStyle();
-		Texture tex = new Texture(
-				Gdx.files.internal("images/common/text_field_cursor.png"));
-		TextureRegion tr = new TextureRegion(tex);
-		tfstyle.cursor = new TextureRegionDrawable(tr);
+		tfstyle.cursor = new TextureRegionDrawable(atlas.createSprite("text_field_cursor"));
 		
 
 
-		tex = new Texture(Gdx.files.internal("images/common/text_field_bg.png"));
-		tr = new TextureRegion(tex);
-		tfstyle.background = new TextureRegionDrawable(tr);
+		tfstyle.background = new TextureRegionDrawable(atlas.createSprite("text_field_bg"));
 		tfstyle.font = textFieldFont;
 		tfstyle.fontColor = new Color(0, 0, 0, 1);
 		 
@@ -90,9 +90,7 @@ public class LoginScene extends BaseScene {
 		uiStage.addActor(passwordTF);
 
 		TextButtonStyle tbstyle = new TextButtonStyle();
-		tex = new Texture(Gdx.files.internal("images/common/btn_bg.png"));
-		tr = new TextureRegion(tex);
-		tbstyle.up = new TextureRegionDrawable(tr);
+		tbstyle.up = new TextureRegionDrawable(atlas.createSprite("btn_bg"));
 		tbstyle.font = labelFont;
 		registerTB = new TextButton("зЂВс", tbstyle);
 		registerTB.setSize(80, 36);
@@ -141,6 +139,19 @@ public class LoginScene extends BaseScene {
 	
 	
 	@Override
+	public void render(float delta) {
+		// TODO Auto-generated method stub
+		super.render(delta);
+		if(baseModule.isLogin){
+			SceneData sceneData = new SceneData();
+			sceneData.sceneId = SV.SCENE_MENU;
+			GM.instance().changeScene(sceneData);
+		}
+	}
+
+
+
+	@Override
 	public void show() {
 		// TODO Auto-generated method stub
 		Gdx.input.setInputProcessor(uiStage);
@@ -160,9 +171,7 @@ public class LoginScene extends BaseScene {
 		
 		baseModule.sendLoginRequest(username, password);
 		
-//		SceneData sceneData = new SceneData();
-//		sceneData.sceneId = SV.SCENE_MENU;
-//		GM.instance().changeScene(sceneData);
+
 	}
 	
 	private void debug(){

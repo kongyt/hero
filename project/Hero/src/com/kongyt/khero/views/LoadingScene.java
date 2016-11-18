@@ -17,7 +17,7 @@ public class LoadingScene extends BaseScene{
 	
 	public LoadingScene(){
 		
-		TextureAtlas atlas = RM.instance().getTexAtls("loading/loading.atlas");
+		TextureAtlas atlas = RM.instance().getTexAtls("hero_loading/hero_loading.atlas");
 		Sprite tmp1 = atlas.createSprite("loading_bg");
 		loading_bg = new Image(tmp1);
 		uiStage.addActor(loading_bg);

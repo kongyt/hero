@@ -1,7 +1,10 @@
 package com.kongyt.khero.net;
 
 import com.google.protobuf.InvalidProtocolBufferException;
+import com.kongyt.khero.common.SceneData;
+import com.kongyt.khero.managers.GM;
 import com.kongyt.khero.messages.Message.*;
+import com.kongyt.khero.utils.SV;
 
 
 public class BaseModule extends BaseMsgModule {
@@ -10,6 +13,7 @@ public class BaseModule extends BaseMsgModule {
 		this.moduleId = 0x00010000;
 	}
 
+	public boolean isLogin = false;
 	
 	// 分发模块消息到具体的消息响应函数
 	@Override
@@ -107,6 +111,8 @@ public class BaseModule extends BaseMsgModule {
 				int token = res.getLogin().getToken();
 				System.out.println("登陆成功");
 				System.out.println("Token=" + token);
+				
+				isLogin = true;
 			}else{
 				System.out.println("登陆失败");
 				System.out.println("错误信息:"+ res.getErrorDescribe());
